@@ -1,4 +1,6 @@
 import React from "react";
+import Friend from "./Friend";
+import { connect } from "react-redux";
 
 class FriendsList extends React.Component {
     constructor() {
@@ -10,9 +12,20 @@ class FriendsList extends React.Component {
 
     render() {
         return(
-            <div></div>
+            <div>
+                {this.props.friends.map(friend => <Friend friend={friend} />     
+                )}
+            </div>
         )
     }
 }
 
-export default FriendsList;
+const mapStateToProps = state => ({
+    friends : state.friends
+})
+    
+
+
+export default connect ( 
+    mapStateToProps, 
+    {})(FriendsList);

@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { login } from "../actions"
 
 class LoginForm extends React.Component {
     constructor() {
@@ -16,20 +18,24 @@ class LoginForm extends React.Component {
     }
 
     submitForm = event => {
-
+        event.preventDefault();
+        this.props.login({username : this.state.username, password: this.state.password})
     }
+
 
     render() {
         return (
             <div>
                 <form>
                     <input 
+                        type="text"
                         name="username"
                         value={this.state.username}
                         placeholder="Username"
                         onChange={this.updateField}
                     />
                     <input 
+                        type="password"
                         name="password"
                         value={this.state.password}
                         placeholder="Password"
@@ -42,4 +48,7 @@ class LoginForm extends React.Component {
     }
 }
 
-export default LoginForm;
+export default connect(
+    null,
+    { login }
+  )(LoginForm);
