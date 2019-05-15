@@ -1,9 +1,11 @@
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE } from "../actions";
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE, GET_FRIENDS_SUCCESS, GET_FRIENDS_START, GET_FRIENDS_FAILURE } from "../actions";
 
 
 const initialState = {
     friends : [],
-    error : ""
+    error : "", 
+    token : "",
+    retrivingFriends : false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -14,9 +16,10 @@ const reducer = (state = initialState, action) => {
             return state;
             
         case LOGIN_SUCCESS:
+            console.log(action.payload)
             return {
                 ...state,
-                friends : action.payload,
+                token : action.payload,
                 error : ""
             }
 
@@ -26,6 +29,28 @@ const reducer = (state = initialState, action) => {
                 error : action.payload,
             }
 
+        case GET_FRIENDS_START:
+
+            return {
+                ...state,
+                retrivingFriends : true
+            }
+
+        case GET_FRIENDS_SUCCESS:
+            console.log(action.payload)
+            return {
+                ...state,
+                retrivingFriends : false,
+                friends : action.payload
+            }
+
+        case GET_FRIENDS_FAILURE:
+            return {
+                ...state,
+                retrivingFriends : false,
+                error : action.payload
+            }    
+            
         default:
             return state;
     }

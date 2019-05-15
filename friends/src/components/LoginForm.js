@@ -20,6 +20,10 @@ class LoginForm extends React.Component {
     submitForm = event => {
         event.preventDefault();
         this.props.login({username : this.state.username, password: this.state.password})
+        this.setState({
+            username : "",
+            password: ""
+        })
     }
 
 
