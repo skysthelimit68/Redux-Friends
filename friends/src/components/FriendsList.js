@@ -7,7 +7,7 @@ class FriendsList extends React.Component {
     constructor() {
         super();
         this.state = {
-
+            
         }
     }
 

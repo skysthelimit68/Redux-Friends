@@ -23,11 +23,6 @@ export const login = userInfo => dispatch => {
     )
 }
 
-/*const request = axios.get('http://localhost:5000/api/friends', {
-    headers: {
-        "authorization": window.localStorage.getItem('auth')
-    }})*/
-
 export const getFriends = () => dispatch => {
     console.log("getting it")
 
