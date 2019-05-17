@@ -11,7 +11,7 @@ const Friend = props => {
         event.preventDefault();
         console.log(props)
         props.deleteFriend(props.friend.id)
-        .then(() => props.history.push('/friends-list'))
+        window.location.reload(); 
     }
 
     return (

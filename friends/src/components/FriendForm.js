@@ -13,16 +13,7 @@ class FriendForm extends React.Component {
             email:"",
         }
     }
-/*
-    componentDidMount = () => {
-        this.setState({
-            name:this.props.activeFriend.name,
-            age:this.props.activeFriend.age,
-            email:this.props.activeFriend.email
 
-        })
-    }
-*/
     updateField = event => {
         event.preventDefault();
         this.setState({
