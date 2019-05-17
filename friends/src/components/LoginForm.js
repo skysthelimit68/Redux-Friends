@@ -20,11 +20,12 @@ class LoginForm extends React.Component {
     submitForm = event => {
         event.preventDefault();
         this.props.login({username : this.state.username, password: this.state.password})
+        .then(() => this.props.history.push('/friends-list'))
         this.setState({
             username : "",
             password: ""
         })
-        this.props.history.push('/friends-list');
+        
     }
 
 

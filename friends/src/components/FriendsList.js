@@ -1,25 +1,44 @@
 import React from "react";
 import Friend from "./Friend";
 import { connect } from "react-redux";
-import { getFriends } from "../actions";
+import { getFriends} from "../actions";
+import Loader from 'react-loader-spinner'
 
 class FriendsList extends React.Component {
     constructor() {
         super();
         this.state = {
-            
+            friends : []
         }
     }
 
+    
+
     componentDidMount() {
         this.props.getFriends();
+        this.setState({
+            friends : this.props.friends
+        })
     }
 
+    componentDidUpdate() {
+        if(this.props.friends !== this.state.friends)
+        this.setState({
+            friends : this.props.friends
+        })
+        
+    }
+
+    
     render() {
-        console.log(this.props.friends)
         return(
+            
             <div>
-                {this.props.friends.map(friend => <Friend friend={friend} />) }               
+            {this.props.retrivingFriends && (
+                <Loader type="Ball-Triangle" color="#00BFFF" height="90" width="60" />
+            )}
+
+                {this.props.friends.map(friend => <Friend friend={friend} {...this.props}/>) }               
             </div>
         )
     }
@@ -27,10 +46,11 @@ class FriendsList extends React.Component {
 
 const mapStateToProps = state => ({
     friends : state.friends, 
-    token : state.token
+    token : state.token,
+    retrivingFriends : state.retrivingFriends
+    
 })
     
-
 
 export default connect ( 
     mapStateToProps, 

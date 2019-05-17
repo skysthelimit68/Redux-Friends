@@ -1,4 +1,5 @@
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE, GET_FRIENDS_SUCCESS, GET_FRIENDS_START, GET_FRIENDS_FAILURE } from "../actions";
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE, GET_FRIENDS_SUCCESS, GET_FRIENDS_START, GET_FRIENDS_FAILURE,
+ ADD_FRIEND_START, ADD_FRIEND_SUCCESS, ADD_FRIEND_FAILURE, UPDATE_FRIEND_START, UPDATE_FRIEND_SUCCESS, UPDATE_FRIEND_FAILURE } from "../actions";
 
 
 const initialState = {
@@ -6,6 +7,8 @@ const initialState = {
     error : "", 
     token : "",
     retrivingFriends : false,
+    addingFriend : false,
+    updatingFriend: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,7 +16,10 @@ const reducer = (state = initialState, action) => {
     switch(action.type) {
         case LOGIN_START:
             console.log("login starting")
-            return state;
+            return {
+                ...state,
+                error: ""
+            };
             
         case LOGIN_SUCCESS:
             console.log(action.payload)
@@ -30,10 +36,10 @@ const reducer = (state = initialState, action) => {
             }
 
         case GET_FRIENDS_START:
-
             return {
                 ...state,
-                retrivingFriends : true
+                retrivingFriends : true,
+                error: ""
             }
 
         case GET_FRIENDS_SUCCESS:
@@ -51,6 +57,44 @@ const reducer = (state = initialState, action) => {
                 error : action.payload
             }    
             
+        case ADD_FRIEND_START:
+            return {
+                ...state,
+                addingFriend : true,
+                error: ""
+            }
+        case ADD_FRIEND_SUCCESS:
+            console.log(action.payload)
+            return {
+                ...state,
+                addingFriend : false,
+                friends : action.payload
+            }
+        case ADD_FRIEND_FAILURE: 
+            return {
+                ...state,
+                addingFriend : false,
+                error: action.payload
+            }
+        case UPDATE_FRIEND_START:
+            return {
+                ...state,
+                updatingFriend : true,
+                error: ""
+            }
+        case UPDATE_FRIEND_SUCCESS:
+            console.log(action.payload)
+            return {
+                ...state,
+                updatingFriend : false,
+                friends : action.payload
+            }
+        case UPDATE_FRIEND_FAILURE: 
+            return {
+                ...state,
+                updatingFriend : false,
+                error: action.payload
+            }
         default:
             return state;
     }
